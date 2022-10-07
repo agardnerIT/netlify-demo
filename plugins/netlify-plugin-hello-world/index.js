@@ -20,13 +20,31 @@ module.exports = {
 
 const { env } = require('process')
 
+var fs = require('fs');
+
+
 module.exports = {
   onPostBuild: ({ constants, netlifyConfig, utils}) => {
 
+    let baseUrl = netlifyConfig.build.environment.DEPLOY_PRIME_URL;
+
     console.log("Hello world from onPostBuild event!");
-    console.log(constants);
+
+    fs.readdirSync("./.dynatrace").forEach(file => {
+      console.log(file);
+    });
+
+    console.log("Loading .dynatrace/pages file");
+    let rawdata = fs.readFileSync('./.dynatrace/pages');
+    let pages_file = JSON.parse(rawdata);
+    console.log(pages_file)
+
+    for (var page in pages_file) {
+      console.log(baseUrl + "/" + page + " must respond in: " + pages_file[page]);
+    }
+    //console.log(constants);
     console.log("--------------------------");
-    console.log(netlifyConfig);
+    console.log(netlifyConfig.build.environment.DEPLOY_PRIME_URL);
 
     const { git } = utils;
 

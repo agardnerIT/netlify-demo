@@ -40,7 +40,7 @@ module.exports = {
     console.log(pages_file)
 
     pages_file.forEach((element, index, array) =>
-        console.log(baseUrl + "/" + element['page-url'] + " must respond in: " + element['time'])
+        console.log(baseUrl + "/" + element['path'] + " must respond in: " + element['time'])
     )
 
     const { git } = utils;

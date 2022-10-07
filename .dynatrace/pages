@@ -1,4 +1,4 @@
 [{
-    "page": "/posts/hello-world",
+    "path": "/posts/hello-world",
     "time": "1000ms"
 }]

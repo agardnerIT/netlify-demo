@@ -1,3 +1,4 @@
 [{
-    "/posts/hello-world": "1000ms"
+    "page": "/posts/hello-world",
+    "time": "1000ms"
 }]

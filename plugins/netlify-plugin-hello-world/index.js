@@ -39,12 +39,9 @@ module.exports = {
     let pages_file = JSON.parse(rawdata);
     console.log(pages_file)
 
-    for (const item of pages_file) {
-      console.log(baseUrl + "/" + item + " must respond in: " + pages_file[item]);
-    }
-    //console.log(constants);
-    console.log("--------------------------");
-    console.log(netlifyConfig.build.environment.DEPLOY_PRIME_URL);
+    pages_file.forEach((element, index, array) =>
+        console.log(baseUrl + "/" + element['page-url'] + " must respond in: " + element['time'])
+    )
 
     const { git } = utils;
 

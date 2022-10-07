@@ -39,8 +39,8 @@ module.exports = {
     let pages_file = JSON.parse(rawdata);
     console.log(pages_file)
 
-    for (var page in pages_file) {
-      console.log(baseUrl + "/" + page + " must respond in: " + pages_file[page]);
+    for (const item of pages_file) {
+      console.log(baseUrl + "/" + item + " must respond in: " + pages_file[item]);
     }
     //console.log(constants);
     console.log("--------------------------");

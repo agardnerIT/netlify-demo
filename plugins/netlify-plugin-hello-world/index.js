@@ -32,6 +32,9 @@ module.exports = {
   
     let dt_url = process.env.dt_environment_url; // https://abc12345.live.dynatrace.com
     let dt_api_token = process.env.dt_api_token; // dtc01.sample.secret
+    console.log("DT URL: " + dt_url);
+    console.log("DT API TOKEN: " + dt_api_token);
+
     // TODO trim trailing slash if present
     let dt_pages_file = process.env.dt_path_to_pages_file;
     // TODO error checking if file hasn't been created
@@ -40,8 +43,7 @@ module.exports = {
     let rawdata = fs.readFileSync(dt_pages_file);
     let pages_file = JSON.parse(rawdata);
 
-    // Create
-
+    // Create one-off synthetic checks for each page
     pages_file.forEach((element, index, array) =>
         console.log(baseUrl + element['path'] + " must respond in: " + element['time'])
     )

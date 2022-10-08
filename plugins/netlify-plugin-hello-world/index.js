@@ -26,18 +26,21 @@ var fs = require('fs');
 module.exports = {
   onPostBuild: ({ constants, netlifyConfig, utils}) => {
 
-    let baseUrl = netlifyConfig.build.environment.DEPLOY_PRIME_URL;
-
     console.log("Hello world from onPostBuild event!");
 
-    fs.readdirSync("./.dynatrace").forEach(file => {
-      console.log(file);
-    });
+    let baseUrl = process.env.DEPLOY_PRIME_URL; // Netlify deploy preview or base URL
+  
+    let dt_url = process.env.dt_environment_url; // https://abc12345.live.dynatrace.com
+    let dt_api_token = process.env.dt_api_token; // dtc01.sample.secret
+    // TODO trim trailing slash if present
+    let dt_pages_file = process.env.dt_path_to_pages_file;
+    // TODO error checking if file hasn't been created
 
-    console.log("Loading .dynatrace/pages file");
-    let rawdata = fs.readFileSync('./.dynatrace/pages');
+    // Read array
+    let rawdata = fs.readFileSync(dt_pages_file);
     let pages_file = JSON.parse(rawdata);
-    console.log(pages_file)
+
+    // Create
 
     pages_file.forEach((element, index, array) =>
         console.log(baseUrl + element['path'] + " must respond in: " + element['time'])

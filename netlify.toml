@@ -7,3 +7,8 @@
 
 [[plugins]]
   package = "/plugins/netlify-plugin-hello-world"
+
+[build.environment]
+  dt_path_to_pages_file = ".dynatrace/pages"
+  dt_environment_url = "https://example.com"
+  dt_api_token = "${{ secrets.FOO }}"

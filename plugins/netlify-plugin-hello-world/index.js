@@ -56,15 +56,17 @@ module.exports = {
     file.on("finish", () => {
         file.close();
         console.log("Download Completed. sitemap.xml written to .dynatrace/sitemap.xml");
+
+        // TODO: Commit .dynatrace/config.yaml and sitemap to git
+        // git add -A
+        // git commit -m "add dynatrace config and sitemap.xml"
+        // Hmm won't this cause an endless build loop?
+
+        run.command("ls -l");
     });
     });
 
-    // TODO: Commit .dynatrace/config.yaml and sitemap to git
-    // git add -A
-    // git commit -m "add dynatrace config and sitemap.xml"
-    // Hmm won't this cause an endless build loop?
-
-    run.command("ls -l");
+    
 
     // Old logic below
     /*

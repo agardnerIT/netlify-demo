@@ -19,8 +19,8 @@ module.exports = {
 */
 
 const { env } = require('process')
-
 var fs = require('fs');
+const http = require('https');
 
 /*
   This plugin is designed to be used wherever a sitemap.xml is available
@@ -34,9 +34,37 @@ module.exports = {
     const { run } = utils
 
     let baseUrl = process.env.DEPLOY_PRIME_URL; // Netlify deploy preview or base URL
-    let sitemapUrl = baseUrl+"/sitemap.xml"
-    run.command("ls -l")
-    console.log("Base URL: " + baseUrl)
+    let sitemapUrl = baseUrl+"/sitemap.xml";
+    run.command("ls -l");
+    run.command("git remote -v");
+    console.log("Base URL: " + baseUrl);
+    console.log("Sitemap URL: " + baseUrl);
+    
+    var dir = '.dynatrace';
+    
+    // If the .dynatrace directory doesn't already exist, create it.
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+    
+    // Download sitemap.xml from https://example.com/sitemap.xml
+    const file = fs.createWriteStream(dir + "/sitemap.xml");
+    const request = http.get(sitemapUrl, function(response) {
+    response.pipe(file);
+
+    // after download completed close filestream
+    file.on("finish", () => {
+        file.close();
+        console.log("Download Completed. sitemap.xml written to .dynatrace/sitemap.xml");
+    });
+    });
+
+    // TODO: Commit .dynatrace/config.yaml and sitemap to git
+    // git add -A
+    // git commit -m "add dynatrace config and sitemap.xml"
+    // Hmm won't this cause an endless build loop?
+
+    run.command("ls -l");
 
     // Old logic below
     /*

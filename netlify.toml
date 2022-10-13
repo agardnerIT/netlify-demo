@@ -7,3 +7,6 @@
 
 [[plugins]]
   package = "/plugins/netlify-plugin-hello-world"
+  
+[[plugins]]
+package = "@netlify/plugin-sitemap"

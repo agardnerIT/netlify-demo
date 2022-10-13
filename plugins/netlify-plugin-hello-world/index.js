@@ -37,8 +37,6 @@ module.exports = {
     let sitemapUrl = baseUrl+"/sitemap.xml"
     run.command("ls -l")
     console.log("Base URL: " + baseUrl)
-    console.log("----")
-    console.log(ls -l)
 
     // Old logic below
     /*

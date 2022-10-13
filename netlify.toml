@@ -8,5 +8,10 @@
 [[plugins]]
   package = "/plugins/netlify-plugin-hello-world"
   
+[build.environment]
+  dt_path_to_pages_file = ".dynatrace/pages"
+  dt_environment_url = "https://jao16384.sprint.dynatracelabs.com"
+  dt_api_token = "${{ secrets.FOO }}"
+  
 [[plugins]]
 package = "@netlify/plugin-sitemap"
